@@ -1,0 +1,23 @@
+# A vendor SDK, if one is ever unpacked here to compare against. They are
+# several GB and not redistributable. Never commit one.
+refs/
+
+# Built tools (make tools).
+bin/
+
+# Capture bundles a probe writes on every run. Per-run diagnostics, not
+# fixtures.
+*-capture/
+
+# Test fixtures. NOTHING in either testdata directory is committed: they hold
+# whatever came off the camera on the desk — a single RAW frame is 25-80 MB —
+# and the README in each says how to make them again. Ignore everything and
+# whitelist the two READMEs, rather than listing filenames, so a fresh capture
+# can never be committed by accident whatever it is called.
+fuji/testdata/*
+!fuji/testdata/README.md
+sony/testdata/*
+!sony/testdata/README.md
+
+sony.test
+fuji.test
