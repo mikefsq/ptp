@@ -1,3 +1,3 @@
 module github.com/mikefsq/ptp
 
-go 1.25.3
+go 1.25.0
