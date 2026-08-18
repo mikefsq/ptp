@@ -50,6 +50,7 @@ typedef struct {
     UInt16   pid;
     UInt32   location;
     uint32_t ifaceClass;   // USB interface class: 6 = still image (PTP), 8 = mass storage
+    uint64_t entry;        // IORegistry entry id: new on every plugging-in
     char     serial[64];
     char     name[128];
 } ptp_info;
@@ -229,6 +230,8 @@ static int ptp_enumerate(const uint32_t* vids, int nvids, ptp_info* list, int ma
             // reported as such instead of just failing to open.
             list[n].ifaceClass = 0;
             reg_u32(svc, CFSTR("bInterfaceClass"), &list[n].ifaceClass);
+            list[n].entry = 0;
+            IORegistryEntryGetRegistryEntryID(svc, &list[n].entry);
             n++;
         }
         IOObjectRelease(svc);
@@ -403,6 +406,7 @@ func enumerate(vids []uint16) ([]DeviceInfo, error) {
 			Serial:     C.GoString(&list[i].serial[0]),
 			Name:       C.GoString(&list[i].name[0]),
 			IfaceClass: uint32(list[i].ifaceClass),
+			Attachment: uint64(list[i].entry),
 		})
 	}
 	return out, nil

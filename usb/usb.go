@@ -25,6 +25,14 @@ type DeviceInfo struct {
 	// what this package needs; 8 is mass storage, meaning the body's USB mode
 	// needs changing on the camera itself.
 	IfaceClass uint32
+
+	// Attachment identifies this plugging-in of the body: a new value every
+	// time it enumerates, where Serial and (on macOS) Location stay the same.
+	// A probe comparing it against the open transport's Info().Attachment
+	// tells continued presence from a replug that left the handle dead. macOS:
+	// the IORegistry entry id; Linux: bus<<16|address, the same as Location; 0
+	// where the platform offers none.
+	Attachment uint64
 }
 
 // IsPTP reports whether the body is presenting a still-image interface. A body

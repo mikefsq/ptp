@@ -121,6 +121,7 @@ func enumerate(vids []uint16) ([]DeviceInfo, error) {
 			Serial:   sysfsRead(dir, "serial"),
 			Name:     sysfsRead(dir, "product"),
 		}
+		d.Attachment = uint64(d.Location) // devnum is reassigned on every plugging-in
 		// bDeviceClass is 0 when the class lives on the interface, which is the
 		// normal case for cameras; read the first interface's class so a body
 		// sitting in mass-storage mode is reported as such rather than just

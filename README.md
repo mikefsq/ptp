@@ -22,7 +22,7 @@ cam.Capture(120 * time.Second)
 | | |
 |---|---|
 | `ptp` | framing, sessions, objects, property descriptors, events. |
-| `ptp/usb` | the per-OS USB transports. |
+| `ptp/usb` | the per-OS USB transports, enumeration with a per-attachment identity, and `Hotplug` (attach and detach notifications: IOKit on macOS, uevent netlink on Linux). |
 | `ptp/fuji` | Fujifilm X and GFX |
 | `ptp/sony` | Sony Alpha |
 | `ptp/canon`, `ptp/nikon` | not implemented yet |
